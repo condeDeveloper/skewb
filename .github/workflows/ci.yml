@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  testes:
+    name: testes (${{ matrix.so }}, node ${{ matrix.node }})
+    runs-on: ${{ matrix.so }}
+    strategy:
+      fail-fast: false
+      matrix:
+        so: [ubuntu-latest, windows-latest, macos-latest]
+        node: ['20', '22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # O `shell: bash` nao e enfeite: no PowerShell do runner o glob chega ao
+      # node como texto literal.
+      - name: "as regras e os numeros do README"
+        shell: bash
+        run: node --test testes/nucleo.test.js testes/medidas.test.js
+
+  medidas:
+    name: tabelas do README
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: "posicoes por distancia"
+        run: node ferramentas/medidor.js distancias
+      - name: "cada pedaco sozinho"
+        run: node ferramentas/medidor.js pedacos
+      - name: "o IDA* contra a tabela"
+        run: node ferramentas/medidor.js resolvedor
+      - name: "o juiz posicao por posicao e as 90 antipodas, uma vez so"
+        run: node --max-old-space-size=4096 --test testes/juiz.test.js
