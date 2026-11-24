@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skewb — onze giros bastam</title>
+<meta name="description" content="O Skewb varrido inteiro: 3.149.280 posicoes, nenhuma a mais de 11 giros, e os tres pedacos sozinhos dao tres vezes mais do que o cubo deixa juntar.">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header>
+  <h1>Skewb</h1>
+  <p>Um cubo cortado por quatro planos que passam pelo centro. Cada giro roda metade do cubo 120 graus em volta de uma diagonal: um canto, os três cantos vizinhos e os três centros das faces que encostam nele.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Gire</h2>
+  <div class="painel">
+    <div class="linha" style="margin-bottom:16px">
+      <button id="embaralhar" type="button">Embaralhar</button>
+      <button id="resolver" type="button">Resolver no ótimo</button>
+      <button id="reiniciar" type="button">Reiniciar</button>
+    </div>
+    <div id="cubo"></div>
+    <div class="giros">
+      <span>frente-direita-cima</span><button type="button" data-giro="0" aria-label="frente-direita-cima, um sentido">↻</button><button type="button" data-giro="1" aria-label="frente-direita-cima, outro sentido">↺</button>
+      <span>frente-esquerda-baixo</span><button type="button" data-giro="2" aria-label="frente-esquerda-baixo, um sentido">↻</button><button type="button" data-giro="3" aria-label="frente-esquerda-baixo, outro sentido">↺</button>
+      <span>trás-direita-baixo</span><button type="button" data-giro="4" aria-label="trás-direita-baixo, um sentido">↻</button><button type="button" data-giro="5" aria-label="trás-direita-baixo, outro sentido">↺</button>
+      <span>trás-esquerda-cima</span><button type="button" data-giro="6" aria-label="trás-esquerda-cima, um sentido">↻</button><button type="button" data-giro="7" aria-label="trás-esquerda-cima, outro sentido">↺</button>
+    </div>
+    <p id="estado"></p>
+  </div>
+</section>
+
+<section>
+  <h2>O que a varredura respondeu</h2>
+
+  <h3>Onze giros bastam</h3>
+  <p>O Skewb tem <strong>3.149.280 posições</strong>, e a busca em largura passa por todas. Nenhuma está a mais de <strong>11 giros</strong> do resolvido, e só 90 estão a 11. Quase metade, 46,23%, está a 9. Um juiz que tira a rotação de outra fórmula (Rodrigues, em ponto flutuante) e guarda as posições como texto concorda com a distância de cada uma das 3.149.280.</p>
+
+  <h3>Os pedaços sozinhos dão três vezes mais</h3>
+  <p>Os seis centros chegam a 360 arranjos. Os quatro cantos dos eixos nunca saem do lugar, só torcem, e chegam às 81 torções. Os outros quatro cantos chegam a 324 combinações de lugar e torção. O produto dá 9.447.840, <strong>exatamente três vezes</strong> o Skewb: uma regra de torção amarra os cantos que giram aos que andam. Os centros ficam de fora dela: com todos os cantos no lugar, eles ainda chegam aos 360 arranjos.</p>
+
+  <h3>Até quatro giros, nada se repete</h3>
+  <p>Contando que dois giros seguidos no mesmo eixo são um só, há 8 × 6<sup>d−1</sup> sequências de d giros, e até d = 4 cada uma dá uma posição diferente. No quinto giro aparecem as primeiras repetições: faltam 120.</p>
+</section>
+
+<section>
+  <h2>Como rodar</h2>
+  <p>Precisa de Node 20 ou mais novo. Sem dependência nenhuma.</p>
+  <pre><code>npm test          # a suíte inteira (o juiz leva uns minutos)
+npm run medir     # as tabelas rápidas</code></pre>
+  <p>O código está em <a href="https://github.com/condeDeveloper/skewb">github.com/condeDeveloper/skewb</a>.</p>
+</section>
+
+</main>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
