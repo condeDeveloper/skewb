@@ -1,0 +1,15 @@
+{
+  "name": "skewb",
+  "version": "1.0.0",
+  "description": "O Skewb varrido inteiro: 3.149.280 posicoes, nenhuma a mais de 11 giros, e os tres pedacos sozinhos dao exatamente tres vezes o cubo",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test testes/*.test.js",
+    "medir": "node ferramentas/medidor.js"
+  }
+}
